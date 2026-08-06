@@ -1,0 +1,71 @@
+[build-system]
+requires = ["hatchling==1.28.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "tenkai-qec"
+version = "0.1.0"
+description = "Reference implementation of Tenkai and lossy-DEM"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+authors = [
+  {name = "Chenning Tao", email = "tcn@zju.edu.cn"},
+  {name = "Xiaoyi Zhou"},
+  {name = "Liqiang Lu"},
+  {name = "Jianwei Yin"},
+]
+keywords = [
+  "atom loss",
+  "quantum error correction",
+  "surface code",
+]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: Apache Software License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Scientific/Engineering :: Physics",
+]
+dependencies = [
+  "numpy==2.4.2",
+  "pymatching==2.3.1",
+  "scipy==1.17.0",
+  "stim==1.15.0",
+]
+
+[project.urls]
+Repository = "https://github.com/Chenning-Tao/MICRO2026-Tenkai"
+
+[project.optional-dependencies]
+dev = [
+  "pytest==9.0.2",
+]
+
+[tool.uv]
+required-version = "==0.10.2"
+environments = [
+  "sys_platform == 'darwin' and platform_machine == 'arm64'",
+  "sys_platform == 'linux' and platform_machine == 'x86_64'",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/tenkai"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+  "/.github/workflows/test.yml",
+  "/.gitignore",
+  "/LICENSE",
+  "/README.md",
+  "/pyproject.toml",
+  "/src",
+  "/tests",
+  "/uv.lock",
+]

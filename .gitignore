@@ -1,0 +1,10 @@
+.DS_Store
+.pytest_cache/
+.release-smoke/
+.venv/
+__pycache__/
+*.egg-info/
+*.py[cod]
+build/
+dist/
+tenkai-output/

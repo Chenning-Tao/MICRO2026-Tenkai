@@ -1,0 +1,26 @@
+name: test
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.10.2"
+          enable-cache: true
+      - name: Install the locked Python 3.12 environment
+        run: uv sync --locked --extra dev
+      - name: Run tests
+        run: uv run --locked --extra dev python -m pytest -q
+      - name: Check the command-line entry point
+        run: uv run --locked python -m tenkai --help
+      - name: Build wheel and source distribution
+        run: uv build
